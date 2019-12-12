@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import { graphql } from "gatsby"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 class Page extends Component {
   render() {
@@ -7,9 +9,11 @@ class Page extends Component {
 
     return (
       <>
+      <Layout>
+          <SEO title={StaticPage.title} />
         <h1>{StaticPage.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: StaticPage.content }} />
-        {/* <div>{StaticPage.content}</div> */}
+        </Layout>
       </>
     )
   }

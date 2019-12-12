@@ -45,7 +45,7 @@ module.exports = {
         // If useACF is true, then the source plugin will try to import the WordPress ACF Plugin contents.
         // This feature is untested for sites hosted on wordpress.com.
         // Defaults to true.
-        useACF: true,
+        useACF: false,
         // Include specific ACF Option Pages that have a set post ID
         // Regardless if an ID is set, the default options route will still be retrieved
         // Must be using V3 of ACF to REST to include these routes
@@ -64,8 +64,8 @@ module.exports = {
         perPage: 100,
         // Search and Replace Urls across WordPress content.
         searchAndReplaceContentUrls: {
-          sourceUrl: "https://source-url.com",
-          replacementUrl: "https://replacement-url.com",
+          sourceUrl: "https://gatsby438688055.wordpress.com",
+          replacementUrl: "http://localhost",
         },
         // Set how many simultaneous requests are sent at once.
         concurrentRequests: 10,
@@ -100,6 +100,8 @@ module.exports = {
         },
       },
     },
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
