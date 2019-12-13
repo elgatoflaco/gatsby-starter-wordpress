@@ -27,7 +27,7 @@ class Posts extends Component {
           {data.allWordpressPost.edges.map(({ node }) => (
             <div key={node.slug}>
               <Link to={node.slug}>
-                  <img src={node.jetpack_featured_media_url}/>
+                  {/* <img src={node.jetpack_featured_media_url}/> */}
                 <h2>{node.title}</h2>
               </Link>
               <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
@@ -59,7 +59,6 @@ export const pageQuery = graphql`
           title
           excerpt
           slug
-          jetpack_featured_media_url
         }
       }
     }
