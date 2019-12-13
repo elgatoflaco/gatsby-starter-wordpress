@@ -24,6 +24,20 @@ class Post extends Component {
         </div>
       )
     }
+    function FeaturedImage(image) {
+      if (!image) {
+        return null
+      }
+      console.log(image)
+      return (
+        <div>
+          <ReactFancyBox
+            thumbnail={image.localFile.childImageSharp.resize.src}
+            image={image.source_url}
+          />
+        </div>
+      )
+    }
 
     const post = this.props.data.wordpressPost
 
@@ -32,6 +46,7 @@ class Post extends Component {
         <Layout>
           <SEO title={post.title} />
           <h1>{post.title}</h1>
+          {FeaturedImage(post.featured_media)}
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
           {Galeria(post.acf.galeria)}
         </Layout>
@@ -52,6 +67,16 @@ export const postQuery = graphql`
     wordpressPost(id: { eq: $id }) {
       title
       content
+      featured_media {
+        source_url
+        localFile {
+          childImageSharp {
+            resize(width: 200, height: 200) {
+              src
+            }
+          }
+        }
+      }
       acf {
         galeria {
           source_url
