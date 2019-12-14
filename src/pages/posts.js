@@ -3,8 +3,6 @@ import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import ReactFancyBox from "react-fancybox"
-import "react-fancybox/lib/fancybox.css"
 
 class Posts extends Component {
   render() {
@@ -16,14 +14,9 @@ class Posts extends Component {
       return (
         <div>
           <Img
-            // srcSet={image.localFile.childImageSharp.fluid.srcSet}
             fluid={image.localFile.childImageSharp.fluid}
             alt=""
           />
-          {/* <ReactFancyBox
-            thumbnail={image.localFile.childImageSharp.resize.src}
-            image={image.source_url}
-          /> */}
         </div>
       )
     }
@@ -88,6 +81,9 @@ export const pageQuery = graphql`
             source_url
             localFile {
               childImageSharp {
+                sizes(maxWidth: 1800) {
+                  ...GatsbyImageSharpSizes
+                }
                 fluid(maxWidth: 400, maxHeight: 250) {
                   ...GatsbyImageSharpFluid
                 }

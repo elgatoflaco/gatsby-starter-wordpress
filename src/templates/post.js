@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
-import ReactFancyBox from "react-fancybox"
-import "react-fancybox/lib/fancybox.css"
+import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Lightbox from '../components/lightbox'
 
 class Post extends Component {
   render() {
@@ -16,10 +16,10 @@ class Post extends Component {
       return (
         <div>
           {list.map(item => (
-            <ReactFancyBox
-              thumbnail={item.localFile.childImageSharp.resize.src}
-              image={item.source_url}
-            />
+            <Img
+            fluid={item.localFile.childImageSharp.fluid}
+            alt=""
+          />
           ))}
         </div>
       )
@@ -31,9 +31,9 @@ class Post extends Component {
       console.log(image)
       return (
         <div>
-          <ReactFancyBox
-            thumbnail={image.localFile.childImageSharp.resize.src}
-            image={image.source_url}
+          <Img
+            fluid={image.localFile.childImageSharp.fluid}
+            alt=""
           />
         </div>
       )
@@ -48,7 +48,8 @@ class Post extends Component {
           <h1>{post.title}</h1>
           {FeaturedImage(post.featured_media)}
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
-          {Galeria(post.acf.galeria)}
+          {/* {Galeria(post.acf.galeria)} */}
+          <Lightbox images={post.acf.galeria} />
         </Layout>
       </>
     )
@@ -71,6 +72,9 @@ export const postQuery = graphql`
         source_url
         localFile {
           childImageSharp {
+            fluid(maxWidth: 400, maxHeight: 250) {
+              ...GatsbyImageSharpFluid
+            }
             resize(width: 200, height: 200) {
               src
             }
@@ -82,6 +86,12 @@ export const postQuery = graphql`
           source_url
           localFile {
             childImageSharp {
+              sizes(maxWidth: 1800) {
+                ...GatsbyImageSharpSizes
+              }
+              fluid(maxWidth: 400, maxHeight: 250) {
+                ...GatsbyImageSharpFluid
+              }
               resize(width: 200, height: 200) {
                 src
               }
